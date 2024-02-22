@@ -41,7 +41,7 @@ const Account = () => {
   };
 
   return (
-    <div>
+    <div className="atm-container"> {/* This wraps everything in atm-container */}
       <form onSubmit={handleSubmit}>
         <h2 id="total">{status}</h2>
         <label>Select an action below to continue</label>
@@ -76,6 +76,5 @@ const TransactionHistory = ({ transactions }) => {
     </div>
   );
 };
-
 
 ReactDOM.render(<Account />, document.getElementById('root'));
