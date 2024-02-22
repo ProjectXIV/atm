@@ -68,9 +68,12 @@ const TransactionHistory = ({ transactions }) => {
       </div>
       <ul>
         {transactions.map((transaction, index) => (
-          <li key={index} className={transaction.transaction === "Cash Back" ? 'negative' : ''}>
+          <li key={index}>
             <span>{transaction.date}</span>
-            <span>{transaction.transaction === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}</span>
+            {/* Apply the negative class to the transaction amount for cash back */}
+            <span className={transaction.transaction === "Cash Back" ? 'negative' : ''}>
+              {transaction.transaction === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}
+            </span>
             <span>${transaction.balance}</span>
           </li>
         ))}
@@ -78,5 +81,6 @@ const TransactionHistory = ({ transactions }) => {
     </div>
   );
 };
+
 
 ReactDOM.render(<Account />, document.getElementById('root'));
