@@ -1,26 +1,76 @@
-button {
-  background-color: #0c80f3;
-  border: 6px solid #0ff166;
-  border-radius: 10px;
-  width: 150px;
-}
-
-select {
-  display: block;
-  margin-bottom: 20px;
-}
-
+/* Container box for ATM */
 .atm-container {
   display: flex;
   justify-content: space-between;
+  width: 800px;
+  margin: auto;
+  background-color: #f0f0f0; /* Very light gray */
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 15px;
+  padding: 20px;
 }
 
+/* Divider line */
+.atm-container::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: gray; /* Thin gray line */
+}
+
+/* Input field */
+#number-input {
+  border: 1px solid #007bff; /* Blue border for input field */
+}
+
+/* Transaction history styles */
 .transaction-history {
-  width: 40%; /* Adjust based on preference */
-  padding-left: 20px;
+  width: 50%;
 }
 
 .transaction-history ul {
   list-style-type: none;
   padding: 0;
+}
+
+.transaction-history li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.transaction-history li:nth-child(odd) {
+  background-color: #ffffff; /* White background */
+}
+
+.transaction-history li:nth-child(even) {
+  background-color: #e7f3ff; /* Light blue background */
+}
+
+.transaction-history li .withdrawal {
+  color: red; /* Red font color for withdrawals */
+}
+
+/* Column titles */
+.transaction-history h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.transaction-history h3::before {
+  content: "Date";
+  flex: 1;
+}
+
+.transaction-history h3::after {
+  content: "Transaction";
+  flex: 1;
+}
+
+.transaction-history h3 span {
+  flex: 1;
+  text-align: right;
 }
