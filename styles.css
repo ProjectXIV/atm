@@ -8,6 +8,7 @@
   border: 2px solid #007bff; /* Blue border */
   border-radius: 15px;
   overflow: hidden; /* Ensures the border radius applies to child elements */
+  padding: 20px;
 }
 
 /* Style for the ATM interface */
@@ -72,12 +73,12 @@
   margin-top: 10px; /* Space above the submit button */
 }
 
-/* Divider line between ATM interface and transaction history */
-.atm-interface::after {
+/* Removed the blue line from the left side of the box */
+/* .atm-interface::after {
   content: "";
   display: block;
   height: 100%;
   width: 2px;
-  background-color: #007bff; /* Blue border color */
+  background-color: #007bff; 
   margin-left: auto;
-}
+} */
