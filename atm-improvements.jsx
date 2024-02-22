@@ -67,14 +67,14 @@ const TransactionHistory = ({ transactions }) => {
       <h3>Transaction History</h3>
       <div className="transaction-list">
         <div className="transaction-list-header">
-          <div>Date</div>
-          <div>Transaction</div>
-          <div>Subtotal</div>
+          <div className="header">Date</div>
+          <div className="header">Transaction</div>
+          <div className="header">Subtotal</div>
         </div>
         {transactions.map((transaction, index) => (
           <div key={index} className={`transaction-list-item ${transaction.amount < 0 ? "withdrawal" : ""}`}>
             <div>{transaction.date}</div>
-            <div>{transaction.amount > 0 ? `Deposit: $${transaction.amount}` : `Withdrawal: $${Math.abs(transaction.amount)}`}</div>
+            <div>{transaction.amount >= 0 ? `+$${transaction.amount}` : `-$${Math.abs(transaction.amount)}`}</div>
             <div>${transaction.total}</div>
           </div>
         ))}
@@ -82,6 +82,7 @@ const TransactionHistory = ({ transactions }) => {
     </div>
   );
 };
+
 
 
 ReactDOM.render(<Account />, document.getElementById('root'));
