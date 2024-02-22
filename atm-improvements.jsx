@@ -65,17 +65,23 @@ const TransactionHistory = ({ transactions }) => {
   return (
     <div className="transaction-history">
       <h3>Transaction History</h3>
-      <ul>
+      <div className="transaction-list">
+        <div className="transaction-list-header">
+          <div>Date</div>
+          <div>Transaction</div>
+          <div>Subtotal</div>
+        </div>
         {transactions.map((transaction, index) => (
-          <li key={index} className={transaction.amount < 0 ? "withdrawal" : ""}>
-            {transaction.date} - 
-            {transaction.amount > 0 ? `Deposit: $${transaction.amount}` : `Withdrawal: $${Math.abs(transaction.amount)}`}
-            - Running Total: ${transaction.total}
-          </li>
+          <div key={index} className={`transaction-list-item ${transaction.amount < 0 ? "withdrawal" : ""}`}>
+            <div>{transaction.date}</div>
+            <div>{transaction.amount > 0 ? `Deposit: $${transaction.amount}` : `Withdrawal: $${Math.abs(transaction.amount)}`}</div>
+            <div>${transaction.total}</div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
+
 
 ReactDOM.render(<Account />, document.getElementById('root'));
