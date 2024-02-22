@@ -3,8 +3,8 @@ const ATMDeposit = ({ onChange, isDeposit, isValid }) => {
   return (
     <label className="label huge">
       <h3>{choice[Number(!isDeposit)]}</h3>
-      <input id="number-input" type="number" onChange={onChange}></input>
-      <input type="submit" value="Submit" id="submit-input" disabled={!isValid}></input>
+      <input id="number-input" type="number" onChange={onChange} style={{ width: "100px" }}></input>
+      <input type="submit" value="Submit" id="submit-input" disabled={!isValid} style={{ width: "auto", padding: "0 10px" }}></input>
     </label>
   );
 };
@@ -14,12 +14,14 @@ const Account = () => {
   const [totalState, setTotalState] = React.useState(0);
   const [atmMode, setAtmMode] = React.useState("");
   const [validTransaction, setValidTransaction] = React.useState(false);
+  const [transactions, setTransactions] = React.useState([]);
 
   let status = `Account Balance $ ${totalState} `;
 
   const handleChange = (event) => {
     setDeposit(event.target.value);
-    setValidTransaction(true); // Simplified for reverting to known good state
+    const numDeposit = parseFloat(event.target.value) || 0;
+    setValidTransaction(atmMode === "Deposit" || (atmMode === "Cash Back" && numDeposit <= totalState));
   };
 
   const handleSubmit = (event) => {
@@ -28,6 +30,7 @@ const Account = () => {
     const numDeposit = Number(deposit);
     let newTotal = atmMode === "Deposit" ? totalState + numDeposit : totalState - numDeposit;
     setTotalState(newTotal);
+    setTransactions([...transactions, { date: new Date().toLocaleString(), transaction: atmMode, amount: numDeposit, balance: newTotal }]);
     setDeposit(''); // Clear the input field
   };
 
@@ -38,16 +41,34 @@ const Account = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2 id="total">{status}</h2>
-      <label>Select an action below to continue</label>
-      <select onChange={handleModeSelect} name="mode" id="mode-select">
-        <option value="">Select Action</option>
-        <option value="Deposit">Deposit</option>
-        <option value="Cash Back">Cash Back</option>
-      </select>
-      {atmMode && <ATMDeposit onChange={handleChange} isDeposit={atmMode === "Deposit"} isValid={validTransaction} />}
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <h2 id="total">{status}</h2>
+        <label>Select an action below to continue</label>
+        <select onChange={handleModeSelect} name="mode" id="mode-select">
+          <option value="">Select Action</option>
+          <option value="Deposit">Deposit</option>
+          <option value="Cash Back">Cash Back</option>
+        </select>
+        {atmMode && <ATMDeposit onChange={handleChange} isDeposit={atmMode === "Deposit"} isValid={validTransaction} />}
+      </form>
+      <TransactionHistory transactions={transactions} />
+    </div>
+  );
+};
+
+const TransactionHistory = ({ transactions }) => {
+  return (
+    <div className="transaction-history">
+      <h2>Transaction History</h2>
+      <ul>
+        {transactions.map((transaction, index) => (
+          <li key={index}>
+            {`${transaction.date}: ${transaction.transaction} of $${transaction.amount}, Balance: $${transaction.balance}`}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
