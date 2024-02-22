@@ -71,15 +71,16 @@ form {
   justify-content: space-between;
   list-style-type: none; /* Removes list bullet */
   padding: 5px 0;
-  border-bottom: 1px solid #ddd; /* Adds a bottom border to each transaction */
+  border-bottom: 1px solid #ddd; /* Adds a bottom border for each transaction */
 }
 
-.transaction-history li.withdrawal {
-  color: red; /* Red font for withdrawals */
+.transaction-history li .negative {
+  color: red;
 }
+
 
 .transaction-history li:nth-child(even) {
-  background-color: #e7f3ff; /* Light blue background for every other row */
+  background-color: #e7f3ff; /* Light blue background every other row */
 }
 
 /* Additional Styles */
