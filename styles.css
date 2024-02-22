@@ -1,76 +1,64 @@
-/* Container box for ATM */
+/* Container box for ATM and Transaction History */
 .atm-container {
   display: flex;
-  justify-content: space-between;
   width: 800px;
   margin: auto;
   background-color: #f0f0f0; /* Very light gray */
   border: 2px solid #007bff; /* Blue border */
   border-radius: 15px;
+  overflow: hidden; /* Ensures the border radius applies to child elements */
+}
+
+/* Inner container for ATM functionality to enable a dividing line */
+.atm-functionality {
+  border-right: 2px solid gray; /* Thin gray line to only divide the box */
+  flex-grow: 1;
   padding: 20px;
 }
 
-/* Divider line */
-.atm-container::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: gray; /* Thin gray line */
-}
-
-/* Input field */
-#number-input {
-  border: 1px solid #007bff; /* Blue border for input field */
-}
-
-/* Transaction history styles */
 .transaction-history {
-  width: 50%;
-}
-
-.transaction-history ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.transaction-history li {
+  flex-grow: 2;
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  flex-direction: column;
 }
 
-.transaction-history li:nth-child(odd) {
-  background-color: #ffffff; /* White background */
+/* Transaction History Heading */
+.transaction-history h3 {
+  font-size: var(--h3-font-size); /* Adjust based on your specific needs */
+  margin-bottom: 20px;
 }
 
-.transaction-history li:nth-child(even) {
+/* Spreadsheet-like layout for transaction history */
+.transaction-list {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Adjust column sizes as needed */
+  text-align: left;
+  width: 100%;
+}
+
+.transaction-list-header {
+  font-weight: bold;
+}
+
+.transaction-list-item {
+  display: contents; /* Ensures grid alignment */
+}
+
+.transaction-list-item > div {
+  padding: 5px; /* Spacing within cells */
+}
+
+/* Alternating background colors for transaction rows */
+.transaction-list-item:nth-child(odd) > div {
   background-color: #e7f3ff; /* Light blue background */
 }
 
-.transaction-history li .withdrawal {
-  color: red; /* Red font color for withdrawals */
+.transaction-list-item:nth-child(even) > div {
+  background-color: #ffffff; /* White background */
 }
 
-/* Column titles */
-.transaction-history h3 {
-  display: flex;
-  justify-content: space-between;
-}
-
-.transaction-history h3::before {
-  content: "Date";
-  flex: 1;
-}
-
-.transaction-history h3::after {
-  content: "Transaction";
-  flex: 1;
-}
-
-.transaction-history h3 span {
-  flex: 1;
-  text-align: right;
+/* Red font color for subtraction amounts */
+.withdrawal {
+  color: red;
 }
