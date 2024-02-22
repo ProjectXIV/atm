@@ -33,7 +33,7 @@ form {
 }
 
 #number-input, #mode-select {
-  width: 100px; /* Specific width for the number input */
+  width: 150px;
   margin: 10px 0;
 }
 
