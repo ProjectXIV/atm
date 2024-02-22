@@ -46,6 +46,9 @@ form {
 /* Transaction History Styles */
 .transaction-history {
   margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right 20px;
   width: 100%;
   background-color: #ffffff; /* White background for transaction history */
 }
@@ -77,7 +80,6 @@ form {
 .transaction-history li .negative {
   color: red;
 }
-
 
 .transaction-history li:nth-child(even) {
   background-color: #e7f3ff; /* Light blue background every other row */
