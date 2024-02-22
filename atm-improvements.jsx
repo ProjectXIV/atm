@@ -1,9 +1,9 @@
-const ATMDeposit = ({ onChange, isDeposit, isValid }) => {
+const ATMDeposit = ({ onChange, isDeposit, isValid, deposit }) => {
   const choice = ['Deposit', 'Cash Back'];
   return (
     <label className="label huge">
       <h3>{choice[Number(!isDeposit)]}</h3>
-      <input id="number-input" type="number" onChange={onChange}></input>
+      <input id="number-input" type="number" value={deposit} onChange={onChange}></input>
       <input type="submit" value="Submit" id="submit-input" disabled={!isValid}></input>
     </label>
   );
@@ -35,14 +35,15 @@ const Account = () => {
         total: newTotal,
       };
       setTransactions([...transactions, newTransaction]);
+      setDeposit(0); // Clear the input field after submission
     }
   };
 
   const handleModeSelect = (e) => {
     const mode = e.target.value;
     setAtmMode(mode);
+    setDeposit(0); // Clear the input field when changing mode
     setValidTransaction(false);
-    setDeposit(0);
   };
 
   return (
@@ -55,7 +56,14 @@ const Account = () => {
           <option value="Deposit">Deposit</option>
           <option value="Cash Back">Cash Back</option>
         </select>
-        {atmMode && <ATMDeposit onChange={handleChange} isDeposit={atmMode === "Deposit"} isValid={validTransaction} />}
+        {atmMode && (
+          <ATMDeposit
+            onChange={handleChange}
+            isDeposit={atmMode === "Deposit"}
+            isValid={validTransaction}
+            deposit={deposit}
+          />
+        )}
       </div>
       <TransactionHistory transactions={transactions} />
     </div>
