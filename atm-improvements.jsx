@@ -31,7 +31,7 @@ const Account = () => {
     let newTotal = atmMode === "Deposit" ? totalState + numDeposit : totalState - numDeposit;
     setTotalState(newTotal);
     setTransactions([...transactions, { date: new Date().toLocaleString(), transaction: atmMode, amount: numDeposit, balance: newTotal }]);
-    setDeposit(''); // Clear the input field
+    setDeposit(''); // Clear the input field visually and for the next transaction
   };
 
   const handleModeSelect = (e) => {
@@ -41,7 +41,7 @@ const Account = () => {
   };
 
   return (
-    <div className="atm-container"> {/* This wraps everything in atm-container */}
+    <div className="atm-container">
       <form onSubmit={handleSubmit}>
         <h2 id="total">{status}</h2>
         <label>Select an action below to continue</label>
@@ -62,11 +62,13 @@ const TransactionHistory = ({ transactions }) => {
     <div className="transaction-history">
       <h2>Transaction History</h2>
       <div className="transaction-list-header">
-        <span>Date</span><span>Transaction</span><span>Subtotal</span>
+        <span>Date</span>
+        <span>Transaction</span>
+        <span>Subtotal</span>
       </div>
       <ul>
         {transactions.map((transaction, index) => (
-          <li key={index}>
+          <li key={index} className={transaction.transaction === "Cash Back" ? 'negative' : ''}>
             <span>{transaction.date}</span>
             <span>{transaction.transaction === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}</span>
             <span>${transaction.balance}</span>
