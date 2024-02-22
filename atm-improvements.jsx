@@ -1,75 +1,54 @@
-const ATMDeposit = ({ onChange, isDeposit, isValid, deposit }) => {
+const ATMDeposit = ({ onChange, isDeposit, isValid }) => {
   const choice = ['Deposit', 'Cash Back'];
   return (
     <label className="label huge">
       <h3>{choice[Number(!isDeposit)]}</h3>
-      <input id="number-input" type="number" value={deposit} onChange={onChange} min="0"></input>
+      <input id="number-input" type="number" onChange={onChange}></input>
       <input type="submit" value="Submit" id="submit-input" disabled={!isValid}></input>
     </label>
   );
 };
 
 const Account = () => {
-  const [deposit, setDeposit] = React.useState(''); // Use an empty string to keep the field initially blank
+  const [deposit, setDeposit] = React.useState('');
   const [totalState, setTotalState] = React.useState(0);
   const [atmMode, setAtmMode] = React.useState("");
   const [validTransaction, setValidTransaction] = React.useState(false);
-  const [transactions, setTransactions] = React.useState([]);
 
   let status = `Account Balance $ ${totalState} `;
 
   const handleChange = (event) => {
-    let value = event.target.value;
-    setDeposit(value); // Directly use the input value
-    let amount = value ? parseFloat(value) : 0; // Parse the input value to float, default to 0 if empty
-    // Validate transaction only if there's an amount and mode selected
-    if (amount > 0) {
-      if (atmMode === "Deposit") {
-        setValidTransaction(true);
-      } else if (atmMode === "Cash Back" && amount <= totalState) {
-        setValidTransaction(true);
-      } else {
-        setValidTransaction(false);
-      }
-    } else {
-      setValidTransaction(false);
-    }
+    setDeposit(event.target.value);
+    setValidTransaction(true); // Simplified for reverting to known good state
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validTransaction && deposit) {
-      let numAmount = parseFloat(deposit); // Ensure the deposit is treated as a number
-      let newTotal = atmMode === "Deposit" ? totalState + numAmount : totalState - numAmount;
-      setTotalState(newTotal);
-      setTransactions([...transactions, { date: new Date().toLocaleString(), amount: atmMode === "Deposit" ? numAmount : -numAmount, total: newTotal }]);
-      setDeposit(''); // Clear the input after submission
-    }
+    if (!validTransaction) return;
+    const numDeposit = Number(deposit);
+    let newTotal = atmMode === "Deposit" ? totalState + numDeposit : totalState - numDeposit;
+    setTotalState(newTotal);
+    setDeposit(''); // Clear the input field
   };
 
   const handleModeSelect = (e) => {
     setAtmMode(e.target.value);
-    setDeposit(''); // Ensure the field is blank when changing modes
-    setValidTransaction(false); // Reset validation
+    setDeposit(''); // Clear the field when changing modes
+    setValidTransaction(false); // Reset the validation state
   };
 
   return (
-    <div className="atm-container">
-      <div className="atm-interface">
-        <h1 id="total">{status}</h1>
-        <label>Select an action below to continue</label>
-        <select onChange={handleModeSelect} name="mode" id="mode-select">
-          <option value="">Select Action</option>
-          <option value="Deposit">Deposit</option>
-          <option value="Cash Back">Cash Back</option>
-        </select>
-        {atmMode && <ATMDeposit onChange={handleChange} isDeposit={atmMode === "Deposit"} isValid={validTransaction} deposit={deposit} />}
-      </div>
-      <TransactionHistory transactions={transactions} />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h2 id="total">{status}</h2>
+      <label>Select an action below to continue</label>
+      <select onChange={handleModeSelect} name="mode" id="mode-select">
+        <option value="">Select Action</option>
+        <option value="Deposit">Deposit</option>
+        <option value="Cash Back">Cash Back</option>
+      </select>
+      {atmMode && <ATMDeposit onChange={handleChange} isDeposit={atmMode === "Deposit"} isValid={validTransaction} />}
+    </form>
   );
 };
 
-const TransactionHistory = ({ transactions }) => {
-  // TransactionHistory component remains the same
-};
+ReactDOM.render(<Account />, document.getElementById('root'));
