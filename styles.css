@@ -53,9 +53,18 @@ form {
   padding-left: 0;
 }
 
+.transaction-list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
 .transaction-history li {
-  border-bottom: 1px solid #ccc;
-  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 5px 0;
 }
 
 /* Enhancements for visual clarity */
