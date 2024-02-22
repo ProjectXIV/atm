@@ -2,7 +2,7 @@
 .atm-container {
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  width: 850px;
   margin: auto;
   background-color: #f0f0f0; /* Very light gray */
   border: 2px solid #007bff; /* Blue border */
@@ -14,53 +14,53 @@
 /* Style for the ATM interface */
 .atm-interface {
   padding: 20px;
-  width: 50%; /* Half of the container width */
+  width: 400%;
 }
 
 /* Style for the transaction history */
 .transaction-history {
   padding: 20px;
-  width: 50%; /* Half of the container width */
-  background-color: white; /* White background for contrast */
+  width: 600%; 
+  background-color: white; 
 }
 
 /* H1 styles for consistent appearance */
 .atm-interface h1, .transaction-history h1 {
-  font-size: 2em; /* This is usually the default size for H1 */
+  font-size: 2em; /* The default size for H1 */
   margin-bottom: 20px;
 }
 
 /* Input field styling */
 #number-input, #mode-select {
-  border: 1px solid #007bff; /* Blue border for input and select */
-  margin-bottom: 10px; /* Space below the input field */
+  border: 1px solid #007bff; 
+  margin-bottom: 10px; 
 }
 
 /* Transaction list with headers */
 .transaction-list-header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Three columns with designated widths */
-  background-color: #f1f1f1; /* Light grey background for header */
+  grid-template-columns: 1fr 2fr 1fr; 
+  background-color: #f1f1f1; 
   font-weight: bold;
 }
 
 .transaction-list-header > div, .transaction-list-item > div {
   padding: 10px;
-  border-bottom: 1px solid #ddd; /* Light border for cells */
+  border-bottom: 1px solid #ddd; 
 }
 
 /* Alternating background colors for transaction rows */
 .transaction-list-item:nth-child(odd) {
-  background-color: #e7f3ff; /* Light blue background */
+  background-color: #e7f3ff; 
 }
 
 .transaction-list-item:nth-child(even) {
-  background-color: #ffffff; /* White background */
+  background-color: #ffffff; 
 }
 
 /* Red font color for subtraction amounts */
 .withdrawal > div:nth-child(2) {
-  color: red; /* Only color the transaction amount */
+  color: red; 
 }
 
 /* Ensure the input and submit button are on the same line */
@@ -70,15 +70,5 @@
 }
 
 #submit-input {
-  margin-top: 10px; /* Space above the submit button */
+  margin-top: 10px; 
 }
-
-/* Removed the blue line from the left side of the box */
-/* .atm-interface::after {
-  content: "";
-  display: block;
-  height: 100%;
-  width: 2px;
-  background-color: #007bff; 
-  margin-left: auto;
-} */
