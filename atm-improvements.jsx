@@ -10,7 +10,7 @@ const ATMDeposit = ({ onChange, isDeposit, isValid, deposit }) => {
 };
 
 const Account = () => {
-  const [deposit, setDeposit] = React.useState(0);
+  const [deposit, setDeposit] = React.useState('');  // Changed to empty string
   const [totalState, setTotalState] = React.useState(0);
   const [atmMode, setAtmMode] = React.useState("");
   const [validTransaction, setValidTransaction] = React.useState(false);
@@ -19,30 +19,32 @@ const Account = () => {
   let status = `Account Balance $ ${totalState} `;
 
   const handleChange = (event) => {
-    const amount = Number(event.target.value);
+    const amount = event.target.value;  // Removed Number conversion
     setDeposit(amount);
-    setValidTransaction((atmMode === "Deposit" && amount > 0) || (atmMode === "Cash Back" && amount > 0 && amount <= totalState));
+    setValidTransaction((atmMode === "Deposit" && amount > 0) || 
+                        (atmMode === "Cash Back" && amount > 0 && amount <= totalState));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const numberAmount = Number(deposit);  // Convert to number only when needed
     if (validTransaction) {
-      let newTotal = atmMode === "Deposit" ? totalState + deposit : totalState - deposit;
+      let newTotal = atmMode === "Deposit" ? totalState + numberAmount : totalState - numberAmount;
       setTotalState(newTotal);
       const newTransaction = {
         date: new Date().toLocaleString(),
-        amount: atmMode === "Deposit" ? deposit : -deposit,
+        amount: atmMode === "Deposit" ? numberAmount : -numberAmount,
         total: newTotal,
       };
       setTransactions([...transactions, newTransaction]);
-      setDeposit(0); // Clear the input field after submission
+      setDeposit('');  // Clear the input field after submission
     }
   };
 
   const handleModeSelect = (e) => {
     const mode = e.target.value;
     setAtmMode(mode);
-    setDeposit(0); // Clear the input field when changing mode
+    setDeposit('');  // Clear the input field when changing mode
     setValidTransaction(false);
   };
 
