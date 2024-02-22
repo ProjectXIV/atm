@@ -14,6 +14,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #f0f0f0;
+  margin-top: 100px; /* Position the ATM 100px from the top */
 }
 
 /* Form and Input Styles */
@@ -21,27 +22,27 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #e6f7ff; /* Light blue background for the account balance section */
+  padding: 20px;
+  width: 100%;
 }
 
-#number-input {
-  width: 100px; /* Set the width of the number input */
+#number-input, #mode-select {
+  width: 100px; /* Specific width for the number input */
   margin: 10px 0;
 }
 
 #submit-input {
   padding: 5px 10px; /* Adjust padding to fit "Submit" text */
   cursor: pointer;
-}
-
-/* Select Dropdown Styles */
-#mode-select {
-  margin: 10px 0;
+  margin: 10px 0; /* Ensure margin around the button */
 }
 
 /* Transaction History Styles */
 .transaction-history {
   margin-top: 20px;
   width: 100%;
+  background-color: #ffffff; /* White background for transaction history */
 }
 
 .transaction-history h2 {
@@ -63,11 +64,20 @@ form {
 .transaction-history li {
   display: flex;
   justify-content: space-between;
-  list-style-type: none;
+  list-style-type: none; /* Removes list bullet */
   padding: 5px 0;
+  border-bottom: 1px solid #ddd; /* Adds a bottom border to each transaction */
 }
 
-/* Enhancements for visual clarity */
+.transaction-history li.withdrawal {
+  color: red; /* Red font for withdrawals */
+}
+
+.transaction-history li:nth-child(even) {
+  background-color: #e7f3ff; /* Light blue background for every other row */
+}
+
+/* Additional Styles */
 .label.huge h3 {
   margin-bottom: 5px;
 }
