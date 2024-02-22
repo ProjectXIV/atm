@@ -1,7 +1,4 @@
 # Educational Project: Refactoring the ATM
-Description of the project, including the improvements you made
-When you share your link, write a short post answering the following questions:
+In this particular activity, we were given starter code and walked through one way of refactoring an ATM concept code. 
+This version shows my own custom refactoring, as well as a link to the original product I modified.
 
-What improvements did you make?
-Why did you choose this approach?
-What did you find challenging about this process? How did you overcome the challenges?
