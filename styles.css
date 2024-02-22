@@ -1,49 +1,83 @@
-/* Transaction History Heading */
-.transaction-history h3 {
-  font-size: 1.5em; /* Adjust to match your header size */
+/* Container box for ATM and Transaction History */
+.atm-container {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  margin: auto;
+  background-color: #f0f0f0; /* Very light gray */
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 15px;
+  overflow: hidden; /* Ensures the border radius applies to child elements */
+}
+
+/* Style for the ATM interface */
+.atm-interface {
+  padding: 20px;
+  width: 50%; /* Half of the container width */
+}
+
+/* Style for the transaction history */
+.transaction-history {
+  padding: 20px;
+  width: 50%; /* Half of the container width */
+  background-color: white; /* White background for contrast */
+}
+
+/* H1 styles for consistent appearance */
+.atm-interface h1, .transaction-history h1 {
+  font-size: 2em; /* This is usually the default size for H1 */
   margin-bottom: 20px;
-  text-align: center;
 }
 
-/* Spreadsheet-like layout for transaction history */
-.transaction-list {
-  border-collapse: collapse;
-  width: 100%;
+/* Input field styling */
+#number-input, #mode-select {
+  border: 1px solid #007bff; /* Blue border for input and select */
+  margin-bottom: 10px; /* Space below the input field */
 }
 
+/* Transaction list with headers */
 .transaction-list-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
+  grid-template-columns: 1fr 2fr 1fr; /* Three columns with designated widths */
   background-color: #f1f1f1; /* Light grey background for header */
-  text-align: left;
-}
-
-.header {
   font-weight: bold;
-  padding: 10px;
-  border: 1px solid #ddd; /* Light border for cells */
 }
 
-.transaction-list-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Align with headers */
-  text-align: left;
-}
-
-.transaction-list-item > div {
+.transaction-list-header > div, .transaction-list-item > div {
   padding: 10px;
-  border: 1px solid #ddd; /* Light border for cells */
+  border-bottom: 1px solid #ddd; /* Light border for cells */
 }
 
 /* Alternating background colors for transaction rows */
 .transaction-list-item:nth-child(odd) {
-  background-color: #ffffff; /* White background */
+  background-color: #e7f3ff; /* Light blue background */
 }
 
 .transaction-list-item:nth-child(even) {
-  background-color: #e7f3ff; /* Light blue background */
+  background-color: #ffffff; /* White background */
 }
 
 /* Red font color for subtraction amounts */
 .withdrawal > div:nth-child(2) {
-  color: red; /* Only color the transaction 
+  color: red; /* Only color the transaction amount */
+}
+
+/* Ensure the input and submit button are on the same line */
+.label.huge {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-input {
+  margin-top: 10px; /* Space above the submit button */
+}
+
+/* Divider line between ATM interface and transaction history */
+.atm-interface::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 2px;
+  background-color: #007bff; /* Blue border color */
+  margin-left: auto;
+}
