@@ -70,7 +70,7 @@ form {
   display: flex;
   justify-content: space-between;
   list-style-type: none; /* Removes list bullet */
-  padding: 5px 0;
+  padding: 15px 0;
   border-bottom: 1px solid #ddd; /* Adds a bottom border for each transaction */
 }
 
